@@ -108,14 +108,14 @@ def create_topology():
 
     info("*** Adding routers\n")
 
-    r1 = net.addHost("r1", cls=LinuxRouter)
-    r2 = net.addHost("r2", cls=LinuxRouter)
-    r3 = net.addHost("r3", cls=LinuxRouter)
+    r1 = net.addHost("r1", cls=LinuxRouter, ip=None)
+    r2 = net.addHost("r2", cls=LinuxRouter, ip=None)
+    r3 = net.addHost("r3", cls=LinuxRouter, ip=None)
 
     info("*** Adding hosts\n")
 
-    h1 = net.addHost("h1")
-    h2 = net.addHost("h2")
+    h1 = net.addHost("h1", ip=None)
+    h2 = net.addHost("h2", ip=None)
 
     # --------------------------------------------------
     # Create links
