@@ -1,4 +1,3 @@
-# AI-Assisted-OSPF-Congestion-Management
 ## Working OSPF Topology
 
 The current implementation uses Mininet with FRRouting (FRR) to create a small OSPF-enabled network.
