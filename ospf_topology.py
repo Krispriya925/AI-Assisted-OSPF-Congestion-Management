@@ -5,7 +5,6 @@ from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 from mininet.link import TCLink
 
-
 class LinuxRouter(Node):
 
     def config(self, **params):
