@@ -102,7 +102,7 @@ def collect_data():
 
     stats = get_interface_stats(
         "r1",
-        "r1-eth1"
+        "r1-eth2"
     )
 
     ping = get_ping()
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     print("=" * 50)
     print("AI-OSPF Network Monitor")
     print("=" * 50)
-    print("Monitoring r1-eth1 and h1 -> h2 latency")
+    print("Monitoring r1-eth2 and h1 -> h2 latency")
     print("Press Ctrl+C to stop")
     print("=" * 50)
 
