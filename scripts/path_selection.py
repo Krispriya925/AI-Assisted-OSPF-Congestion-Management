@@ -1,13 +1,12 @@
 import networkx as nx
 
+from predict import predict_congestion
+
 
 CONGESTION_PENALTY = 100
 
 
 def build_topology():
-    """
-    Build the current 3-router topology.
-    """
 
     G = nx.Graph()
 
@@ -19,15 +18,6 @@ def build_topology():
 
 
 def calculate_path_cost(G, path):
-    """
-    Calculate total cost of a path.
-
-    Normal link:
-        cost = OSPF cost
-
-    Congested link:
-        cost = OSPF cost + congestion penalty
-    """
 
     total_cost = 0
 
@@ -110,32 +100,49 @@ def select_best_path(G, source, destination, k=3):
     return best_path, best_cost
 
 
-if __name__ == "__main__":
+def apply_ai_prediction(G):
 
-    G = build_topology()
+    prediction, status, confidence, latest = predict_congestion()
+
+    print("\n==============================")
+    print("AI CONGESTION DECISION")
+    print("==============================")
+
+    print(f"Prediction : {status}")
+    print(f"Confidence : {confidence:.2f}%")
+
+    if prediction == 1:
+
+        print("Congestion detected!")
+        print("Applying penalty to R1-R3 link.")
+
+        G["r1"]["r3"]["congested"] = True
+
+    else:
+
+        print("Network is normal.")
+        print("No congestion penalty applied.")
+
+    return G
+
+
+if __name__ == "__main__":
 
     source = "r1"
     destination = "r3"
 
-    # --------------------------------------------------
-    # TEST 1: Normal network
-    # --------------------------------------------------
+    # Build topology
+    G = build_topology()
 
-    print("\n\nTEST 1: NORMAL NETWORK")
+    # ----------------------------------------
+    # AI prediction
+    # ----------------------------------------
 
-    select_best_path(
-        G,
-        source,
-        destination
-    )
+    G = apply_ai_prediction(G)
 
-    # --------------------------------------------------
-    # TEST 2: R1-R3 is congested
-    # --------------------------------------------------
-
-    print("\n\nTEST 2: R1-R3 CONGESTED")
-
-    G["r1"]["r3"]["congested"] = True
+    # ----------------------------------------
+    # Select best path
+    # ----------------------------------------
 
     select_best_path(
         G,
