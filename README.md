@@ -80,6 +80,55 @@ The current implementation is a **route recommendation system**. It does not yet
                                             │
                                             ▼
                                      Path selection
+
+
+                                     OSPF Network
+
+
+The overall flow
+
+             ↓
+        Mininet + FRRouting
+             ↓
+        Network Monitoring
+             ↓
+        Raw Metrics
+        (RX/TX, Packet Rate, Latency)
+             ↓
+        Data Preprocessing
+             ↓
+        Feature Engineering
+             ↓
+        Congestion Prediction
+        (Random Forest)
+             ↓
+        ┌───────────────────────┐
+        │ Congestion Detected?  │
+        └───────────┬───────────┘
+               No   │   Yes
+               ↓    │    ↓
+          Keep      │  K-Shortest
+        Monitoring  │    Paths
+               ↑    │    ↓
+               │    │  Path Health
+               │    │  Evaluation
+               │    │    ↓
+               │    │  Health Score
+               │    │    ↓
+               │    │  Rank Paths
+               │    │    ↓
+               │    │  Best Path
+               │    │    ↓
+               │    │  Route
+               │    │  Recommendation
+               │    │    ↓
+               │    │  SHAP Explanation
+               │    │    ↓
+               │    │  Proposed OSPF
+               │    │    Update
+               │    │    ↓
+               └────┴─ Continuous
+                     Feedback Loop
 ```
 
 ---
