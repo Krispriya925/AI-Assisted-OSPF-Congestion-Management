@@ -8,8 +8,11 @@ FEATURES = [
     "rx_rate",
     "tx_rate",
     "packet_rate",
+    "utilization",
     "min_latency",
-    "max_latency"
+    "avg_latency",
+    "max_latency",
+    "packet_loss"
 ]
 
 
@@ -37,10 +40,12 @@ def predict_congestion():
 
     confidence = probability[prediction] * 100
 
-    if prediction == 1:
-        status = "CONGESTED"
-    else:
+    if prediction == 0:
         status = "NORMAL"
+    elif prediction == 1:
+        status = "CONGESTED"
+    elif prediction == 2:
+        status = "CRITICAL"
 
     return prediction, status, confidence, latest
 
@@ -58,7 +63,9 @@ def main():
     print(f"Packet Rate   : {latest['packet_rate']:.2f} packets/s")
     print(f"Min Latency   : {latest['min_latency']:.3f} ms")
     print(f"Max Latency   : {latest['max_latency']:.3f} ms")
-
+    print(f"Utilization   : {latest['utilization']:.2f}%")
+    print(f"Avg Latency   : {latest['avg_latency']:.3f} ms")
+    print(f"Packet Loss   : {latest['packet_loss']:.2f}%")
     print("-----------------------------------")
     print(f"Prediction    : {status}")
     print(f"Confidence    : {confidence:.2f}%")

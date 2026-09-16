@@ -36,9 +36,6 @@ df["packet_rate"] = (
     / df["time_diff"]
 )
 
-# Main latency feature
-df["latency"] = df["avg_latency"]
-
 # First row has no previous measurement
 df = df.dropna()
 
@@ -48,10 +45,11 @@ features = df[
         "rx_rate",
         "tx_rate",
         "packet_rate",
+        "utilization",
         "min_latency",
         "avg_latency",
         "max_latency",
-        "latency"
+        "packet_loss"
     ]
 ]
 

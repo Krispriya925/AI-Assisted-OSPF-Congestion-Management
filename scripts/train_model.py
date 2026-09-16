@@ -29,8 +29,11 @@ FEATURES = [
     "rx_rate",
     "tx_rate",
     "packet_rate",
+    "utilization",
     "min_latency",
-    "max_latency"
+    "avg_latency",
+    "max_latency",
+    "packet_loss"
 ]
 
 X = df[FEATURES]
