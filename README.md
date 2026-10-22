@@ -122,11 +122,6 @@ The overall flow
                │    │  Route
                │    │  Recommendation
                │    │    ↓
-               │    │  SHAP Explanation
-               │    │    ↓
-               │    │  Proposed OSPF
-               │    │    Update
-               │    │    ↓
                └────┴─ Continuous
                      Feedback Loop
 ```
